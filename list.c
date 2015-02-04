@@ -189,7 +189,7 @@ listItem* listInsertAfterItem(list_t* list, listItem* item, void* data)
 }
 
 
-//Removes item from list, returns item just before removed item (or begin if list is now empty or 0 if item not found)
+//Removes item from list, returns 0 if not found in list, or either NEXT or PREV depending on direction.
 //If freeFunc is not 0 then it is called with the item data as parameter.
 listItem* listRemoveItem(list_t* list, listItem* item, uint_fast8_t direction)
 {
@@ -204,13 +204,13 @@ listItem* listRemoveItem(list_t* list, listItem* item, uint_fast8_t direction)
       it->next->prev = it->prev;
       if(direction==LIST_PREV)
       {
-	ret = it->prev;
+        ret = it->prev;
       } else {
-	ret = it->prev->next;
+        ret = it->prev->next;
       }
       if(list->freeFunc)
       {
-	list->freeFunc(it->data);
+        list->freeFunc(it->data);
       }
       free(it);
       return(ret);
@@ -259,7 +259,7 @@ listItem* listGetItemAt(list_t* list, int index)
 {
   int idx;
   listItem* it;
-  if(index > list->count && index < 0 )
+  if(index > list->count || index < 0 )
   {
       printf("listGetItemData Error: Requested data for index %i in list %p of size %i\n", index,list,list->count );
   } else {
@@ -269,24 +269,24 @@ listItem* listGetItemAt(list_t* list, int index)
       idx=0;
       while( idx < list->count )
       {
-	if(idx == index )
-	{
-	  return(it);
-	}
-	idx++;
-	it=it->next;
+        if(idx == index )
+        {
+          return(it);
+        }
+        idx++;
+        it=it->next;
       }
     } else {
       idx=list->count-1;
       it=list->end.prev;
       while( idx > -1 )
       {
-	if( idx == index )
-	{
-	  return(it);
-	}
-	idx--;
-	it=it->prev;
+        if( idx == index )
+        {
+          return(it);
+        }
+        idx--;
+        it=it->prev;
       }
     }
   }

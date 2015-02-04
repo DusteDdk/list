@@ -71,7 +71,7 @@ listItem* listRemoveItem(list_t* list, listItem* item, uint_fast8_t direction);
 list_t* listInit(listFreeFunc freeFunc);
 
 //Frees memory used by list - If the freeFunc pointer is not null, this is called with the pointer for each data element.
-void listfree(list_t* list );
+void listFree(list_t* list );
 
 //Returns pointer to item at index or NULL if the list is empty or index invalid.
 listItem* listGetItemAt(list_t* list, int index);
