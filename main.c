@@ -35,7 +35,7 @@ void freeItem( void* data )
 void showItems(list_t* list)
 {
   listItem* it=&list->begin;
-  while( (it=it->next) != &list->end )
+  while( LISTFWD(list,it) )
   {
     showItem((item*)it->data);
   }
@@ -116,7 +116,7 @@ int main()
 
   printf("\nRemoving all list2 elements individually in a forward loop.");
   it=&list2->begin;
-  while( (it=it->next) != &list2->end )
+  while( LISTFWD(list2,it) )
   {
     it=listRemoveItem(list2,it, LIST_PREV);
   }
@@ -124,7 +124,7 @@ int main()
 
   printf("\nRemoving all list3 elements individually in a reverse loop.");
   it=&list3->end;
-  while( (it=it->prev) != &list3->begin )
+  while( LISTBCK(list3, it) )
   {
     it=listRemoveItem(list3,it,LIST_NEXT);
   }
@@ -136,7 +136,7 @@ int main()
   listFree(list);
   listFree(list2);
 
-  printf("\nTests done.\n");
+  printf("\nTests done, it's up to you to figure out if they passed, <nelson>hahaaa!</nelson>\n");
 
   return(0);
 }

@@ -22,6 +22,10 @@
  * along with Wizznic.  If not, see <http://www.gnu.org/licenses/>.     *
  ************************************************************************/
 
+//Macro for iterating
+#define LISTFWD(LIST, IT) (IT=IT->next) != &LIST->end
+#define LISTBCK(LIST, IT) (IT=IT->prev) != &LIST->begin
+
 struct listItemStruct
 {
   void* data;
