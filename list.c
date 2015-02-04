@@ -259,9 +259,9 @@ listItem* listGetItemAt(list_t* list, int index)
 {
   int idx;
   listItem* it;
-  if(index > list->count || index < 0 )
+  if(index > list->count-1 || index < 0 )
   {
-      printf("listGetItemData Error: Requested data for index %i in list %p of size %i\n", index,list,list->count );
+      printf("\n----\nlistGetItemData Error: Requested data for index %i in list %p of size %i\n----\n", index,list,list->count );
   } else {
     if( index <= list->count/2)
     {
